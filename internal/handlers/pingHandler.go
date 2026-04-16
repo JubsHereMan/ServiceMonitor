@@ -5,7 +5,7 @@ import (
 	"github.com/gofiber/fiber/v3"
 )
 func HandlerPing(c fiber.Ctx) error{
-	result:= services.ResponsesStatus()
+	result:= services.GetLastResults()
 	return c.JSON(result)
 
 }

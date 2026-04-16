@@ -51,7 +51,8 @@ func GetStatusResponse(s string) *model.Response{
 			fmt.Println(err)
 			return &model.Response{
 				Service: s,
-				Status:  false,
+				Status:  "NÃO POSSIVEL ACESSAR SITE",
+				Code: 0,
 			}
 			
 		}
@@ -64,14 +65,16 @@ func GetStatusResponse(s string) *model.Response{
 		if status >= 200 && status < 400{
 				return &model.Response{
 				Service: s,
-				Status: true,
+				Status: "ONLINE",
+				Code: 1,
 			
 			}
 		}else{
 			fmt.Println(s,status)
 				return &model.Response{
 				Service: s,
-				Status: false,
+				Status: "OFFLINE",
+				Code: 0,
 			}
 				
 		}
@@ -99,4 +102,22 @@ func ResponsesStatus()[]*model.Response{
 	return results
 }
 
+var lastResults []*model.Response
 
+func UpdateStatus(){
+	lastResults= ResponsesStatus()
+
+}
+
+func GetLastResults() []*model.Response {
+	if lastResults == nil {
+		return []*model.Response{
+			{
+				Service: "system",
+				Status:  "loading",
+				Code:    0,
+			},
+		}
+	}
+	return lastResults
+}
