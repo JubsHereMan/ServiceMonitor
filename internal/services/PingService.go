@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
+	"os"
+	"strings"
 	"time"
 )
 
@@ -41,7 +43,7 @@ func parseUrl(s string)(*http.Response, string, error){
 	return nil, "", fmt.Errorf("não foi possível acessar a URL com HTTP ou HTTPS")
 }
 
-func GetStatusResponse(s string) bool {
+func GetStatusResponse(s string)bool {
 	resp,_,err:=parseUrl(s)
 		if err !=nil{
 			fmt.Println("Erro ao acessar a URL:", err)
@@ -58,3 +60,18 @@ func GetStatusResponse(s string) bool {
 		}
 	return result
 }
+
+
+func readArchive(){
+	data, err := os.ReadFile("internal/data/sites.txt")
+	if err != nil{
+		fmt.Println("erro aconteceu ao acessar o arquivo:", err)
+	}
+	lines := strings.Split(string(data),"\n")
+
+	for _, linha := range lines {
+		GetStatusResponse(linha)
+	}
+}
+
+

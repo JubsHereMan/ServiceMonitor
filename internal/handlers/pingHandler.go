@@ -1,9 +1,15 @@
 package handlers
 
-import(
+import (
 	"monitoramento/internal/services"
+
+	"github.com/gofiber/fiber/v3"
 )
-func HandlerPing() bool{
+func HandlerPing(c fiber.Ctx) error{
 	result:= services.GetStatusResponse("youtube.com/")
-	return result
+	
+	return c.JSON(fiber.Map{
+		"service": "youtube.com",
+		"status": result,
+	})
 }

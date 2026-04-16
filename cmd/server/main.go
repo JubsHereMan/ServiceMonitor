@@ -1,11 +1,15 @@
 package main
 
 import (
-	"fmt"
 	"monitoramento/internal/handlers"
+	"github.com/gofiber/fiber/v3"
 )
 
 func main() {
-	result := handlers.HandlerPing()
-	fmt.Println(result)
+
+	app:= fiber.New()
+
+	app.Get("/", handlers.HandlerPing)
+
+	app.Listen(":3000")
 }
