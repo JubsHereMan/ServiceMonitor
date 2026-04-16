@@ -1,6 +1,6 @@
 package model
 
-type response struct{
-	service string
-	status bool
+type Response struct {
+	Service string `json:"service"`
+	Status  bool   `json:"status"`
 }

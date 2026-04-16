@@ -7,6 +7,7 @@ import (
 	"os"
 	"strings"
 	"time"
+	"monitoramento/internal/model"
 )
 
 
@@ -43,35 +44,59 @@ func parseUrl(s string)(*http.Response, string, error){
 	return nil, "", fmt.Errorf("não foi possível acessar a URL com HTTP ou HTTPS")
 }
 
-func GetStatusResponse(s string)bool {
-	resp,_,err:=parseUrl(s)
+func GetStatusResponse(s string) *model.Response{
+
+	resp,_,err:= parseUrl(s)
 		if err !=nil{
-			fmt.Println("Erro ao acessar a URL:", err)
+			fmt.Println(err)
+			return &model.Response{
+				Service: s,
+				Status:  false,
+			}
+			
 		}
 	
 	defer resp.Body.Close()
 	status:= resp.StatusCode
-	var result bool
+
+
 	
 		if status >= 200 && status < 400{
-			result = true
+				return &model.Response{
+				Service: s,
+				Status: true,
+			
+			}
 		}else{
-			result = false
+			fmt.Println(s,status)
+				return &model.Response{
+				Service: s,
+				Status: false,
+			}
+				
 		}
-	return result
-}
+	}
 
 
-func readArchive(){
+
+func ResponsesStatus()[]*model.Response{
 	data, err := os.ReadFile("internal/data/sites.txt")
 	if err != nil{
 		fmt.Println("erro aconteceu ao acessar o arquivo:", err)
 	}
 	lines := strings.Split(string(data),"\n")
 
+	var results []*model.Response
+
 	for _, linha := range lines {
-		GetStatusResponse(linha)
+		linha = strings.TrimSpace(linha)
+		if linha == "" {
+			continue
+		}
+		result := GetStatusResponse(linha)
+		results = append(results, result)
 	}
+	return results
 }
 
 

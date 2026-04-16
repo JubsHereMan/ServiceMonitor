@@ -1,4 +1,4 @@
 youtube.com
-steam.com
+store.steampowered.com
 spotify.com
-stackoverflow.com
+linkedin.com
