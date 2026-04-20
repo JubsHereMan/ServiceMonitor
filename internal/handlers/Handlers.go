@@ -9,3 +9,9 @@ func HandlerPing(c fiber.Ctx) error{
 	return c.JSON(result)
 
 }
+
+
+func HandlerPage(c fiber.Ctx) error {
+	results := services.GetLastResults()
+	return c.Render("index", results)
+}
