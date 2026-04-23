@@ -9,9 +9,9 @@ import (
 func Start() {
 	c := cron.New()
 
-	go services.UpdateStatus()
+	services.UpdateStatus()
 
-	c.AddFunc("@every 1m",func() {
+	c.AddFunc("@every 10s",func() {
 		services.UpdateStatus()
 	})
 

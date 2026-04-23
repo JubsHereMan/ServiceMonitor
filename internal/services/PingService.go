@@ -51,8 +51,9 @@ func GetStatusResponse(s string) *model.Response{
 			fmt.Println(err)
 			return &model.Response{
 				Service: s,
-				Status:  "NÃO POSSIVEL ACESSAR SITE",
+				Status:  "OFFLINE",
 				Code: 0,
+				Error:   err.Error(),
 			}
 			
 		}
@@ -67,7 +68,6 @@ func GetStatusResponse(s string) *model.Response{
 				Service: s,
 				Status: "ONLINE",
 				Code: 1,
-			
 			}
 		}else{
 			fmt.Println(s,status)
@@ -75,6 +75,7 @@ func GetStatusResponse(s string) *model.Response{
 				Service: s,
 				Status: "OFFLINE",
 				Code: 0,
+				Error: fmt.Sprintf("status code: %d", status),
 			}
 				
 		}
@@ -110,14 +111,5 @@ func UpdateStatus(){
 }
 
 func GetLastResults() []*model.Response {
-	if lastResults == nil {
-		return []*model.Response{
-			{
-				Service: "system",
-				Status:  "loading",
-				Code:    0,
-			},
-		}
-	}
 	return lastResults
 }

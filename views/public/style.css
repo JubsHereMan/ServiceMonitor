@@ -1,64 +1,113 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
 body {
     font-family: Arial, sans-serif;
-    background: #0f172a;
-    color: #e2e8f0;
-    display: flex;
-    justify-content: center;
-    padding: 40px;
+    background: #0f1117;
+    color: #fff;
 }
 
+/* CONTAINER */
 .container {
-    width: 600px;
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 20px;
 }
 
+/* TITLE */
 h1 {
     text-align: center;
     margin-bottom: 30px;
+    letter-spacing: 2px;
 }
 
+/* LIST */
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* CARD */
 .card {
-    background: #1e293b;
-    border-radius: 12px;
-    padding: 15px 20px;
-    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: 0.2s;
+    background: #1a1d26;
+    padding: 15px 20px;
+    border-radius: 12px;
+    transition: 0.2s ease;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
 }
 
 .card:hover {
     transform: scale(1.02);
 }
 
-.service {
-    font-weight: bold;
+/* LEFT SIDE */
+.info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.status {
-    padding: 5px 10px;
-    border-radius: 8px;
+/* SERVICE NAME */
+.service {
+    font-weight: bold;
     font-size: 14px;
 }
 
-/* STATUS */
-
-.up {
-    background: rgba(34,197,94,0.2);
-    color: #22c55e;
+/* DOT */
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
 }
 
-.down {
-    background: rgba(239,68,68,0.2);
-    color: #ef4444;
+/* BADGE */
+.badge {
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: bold;
+    background: rgba(255,255,255,0.05);
 }
 
-.blocked {
-    background: rgba(251,191,36,0.2);
-    color: #fbbf24;
+/* ========================= */
+/* STATUS COLORS */
+/* ========================= */
+
+/* ONLINE */
+.dot.ONLINE {
+    background-color: #00ff9c;
 }
 
-.loading {
-    background: rgba(148,163,184,0.2);
-    color: #94a3b8;
+.badge.ONLINE {
+    color: #00ff9c;
+    border: 1px solid #00ff9c;
+}
+
+/* OFFLINE */
+.dot.OFFLINE {
+    background-color: #ff4d4d;
+}
+
+.badge.OFFLINE {
+    color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+}
+
+/* LOADING */
+.dot.LOADING {
+    background-color: #ffaa00;
+}
+
+.badge.LOADING {
+    color: #ffaa00;
+    border: 1px solid #ffaa00;
 }

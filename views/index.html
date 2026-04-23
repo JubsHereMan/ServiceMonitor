@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Monitoramento</title>
 
     <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/script.js"></script>
 </head>
 <body>
 
 <div class="container">
     <h1>Status dos Serviços</h1>
 
-    <div class="list">
-        {{range .}}
-            <div class="card">
-                <span class="service">{{.Service}}</span>
-                <span class="status {{.Status}}">
-                    {{.Status}}
-                </span>
-            </div>
-        {{end}}
+   <section class="list" id="service-list">
+    {{range .}}
+    <div class="card">
+        <div class="info">
+            <span class="dot {{.Status}}"></span>
+            <span class="service">{{.Service}}</span>
+        </div>
+
+        <div class="badge {{.Status}}">
+            {{.Status}}
+        </div>
     </div>
+    {{end}}
+</section>
 </div>
 
-<script src="/static/js/script.js"></script>
 </body>
 </html>
